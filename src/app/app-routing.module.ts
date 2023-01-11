@@ -5,9 +5,16 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'demo',
+    redirectTo: 'demo-customer',
   },
-  { path: 'demo', loadChildren: () => import('../../projects/portal/demo/demo.module').then((m) => m.DemoModule) },
+  {
+    path: 'demo-customer',
+    loadChildren: () => import('./core/portals/demo-customer/demo-customer.module').then((m) => m.DemoCustomerModule),
+  },
+  {
+    path: 'demo-staff',
+    loadChildren: () => import('./core/portals/demo-staff/demo-staff.module').then((m) => m.DemoStaffModule),
+  },
 ];
 
 @NgModule({

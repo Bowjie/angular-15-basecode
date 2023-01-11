@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [],
             "outputPath": "dist/demo-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -38,6 +39,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/core/shared/environments/environment.ts",
+                  "with": "src/app/core/shared/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -51,6 +58,34 @@
                 }
               ],
               "outputHashing": "all"
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/core/shared/environments/environment.ts",
+                  "with": "src/app/core/shared/environments/environment.stage.ts"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "uat": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/core/shared/environments/environment.ts",
+                  "with": "src/app/core/shared/environments/environment.uat.ts"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             },
             "development": {
               "buildOptimizer": false,

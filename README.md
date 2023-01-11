@@ -29,3 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Generating Clean Components (Standalone)
 
 ng g c components/button --inline-style --inline-template --skip-tests --flat --standalone
+
+## Node version used
+
+v18.12.1

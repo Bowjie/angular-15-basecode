@@ -4,7 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "start:proxy": "ng serve --proxy-config proxy.conf.json",
+    "build:prod": "ng build --configuration=production --output-path=dist/DEMOAPP.CLIENT.PROD",
+    "build:stage": "ng build --configuration=staging --output-path=dist/DEMOAPP.CLIENT.STAGE",
+    "build:uat": "ng build --configuration=uat --output-path=dist/DEMOAPP.CLIENT.UAT",
+    "build:dev": "ng build --configuration=development --output-path=dist/DEMOAPP.CLIENT.DEV",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
