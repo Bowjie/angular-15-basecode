@@ -17,12 +17,16 @@ export class ModalService {
   }
 
   closeModal() {
-    this.componentSubscriber.complete();
-    this.componentRef.destroy();
+    this.componentSubscriber.next('closed');
+    this.destroyModal();
   }
 
   confirm() {
     this.componentSubscriber.next('confirm');
-    this.closeModal();
+    this.destroyModal();
+  }
+  destroyModal() {
+    this.componentSubscriber.complete();
+    this.componentRef.destroy();
   }
 }

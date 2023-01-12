@@ -1,8 +1,11 @@
+import { formatDate } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { format } from 'date-fns';
 import { Observable, Subscription, shareReplay } from 'rxjs';
 import { Demo } from 'src/app/core/models/demo';
-import { ModalService } from 'src/app/core/services/common';
+import { DemoStoreUserService, ModalService } from 'src/app/core/services/common';
 import { UserService } from 'src/app/core/services/demo';
+import { FORMAT_TO_TIMESTAMP } from 'src/app/core/shared/functions';
 import { ModalFormsComponent } from './components/modal-forms.component';
 
 @Component({
@@ -16,9 +19,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   demoList!: Observable<Demo[]>;
   subscription = new Subscription();
 
-  constructor(private modalService: ModalService, private userService: UserService) {}
+  constructor(private modalService: ModalService, private userService: UserService, private demoStoreUserService: DemoStoreUserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const dateNow = FORMAT_TO_TIMESTAMP(new Date());
+    this.demoStoreUserService.storeUser({ id: 99, name: 'lorem', accessLevel: 'admin', timestamp: dateNow });
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -48,10 +54,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.modalService.openModal(ModalFormsComponent, this.modalEntry, props).subscribe((result) => {
         if (result === 'confirm') {
           this.getUser();
+        } else {
         }
       }),
     );
   }
-}
-{
 }
